@@ -1,7 +1,9 @@
 package com.inn.cashflow.server.core.users.services.impl;
 
+import java.util.Map;
 import java.util.Set;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.inn.cashflow.server.core.baseimpl.config.JwtTokenUtil;
+import com.inn.cashflow.server.core.common.responses.ApiResponse;
 import com.inn.cashflow.server.core.users.dto.AuthRequestDTO;
 import com.inn.cashflow.server.core.users.dto.RegisterRequestDTO;
 import com.inn.cashflow.server.core.users.entities.Users;
@@ -58,7 +61,7 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public ResponseEntity<String> loginUser(AuthRequestDTO request) {
+    public ResponseEntity<ApiResponse<?>> loginUser(AuthRequestDTO request) {
         // Authenticate the user; this will throw an exception if authentication fails
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.username(), request.password()));
@@ -69,7 +72,11 @@ public class AuthServiceImpl implements AuthService{
 
         // Generate and return the JWT token
         String token = jwtTokenUtil.generateToken(user.getUsername(), Set.of(user.getRoles()));
-        return ResponseEntity.ok(token);
+        if(token != null && !token.isEmpty()) {
+            return ResponseEntity.ok(new ApiResponse<>(true, "Login successful", Map.of("token", token)));
+        }else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse<>(false, "Invalid credentials", "Unauthorized"));
+        }
     }
 
     

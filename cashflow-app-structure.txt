@@ -1,4 +1,5 @@
 .
+├── README.md
 ├── build-and-run.sh
 ├── cashflow-app-structure.txt
 ├── cashflow-server-core
@@ -49,16 +50,13 @@
 │       │       │       └── V1__create_user.sql
 │       │       ├── static
 │       │       │   ├── 3rdpartylicenses.txt
-│       │       │   └── browser
-│       │       │       ├── assets
-│       │       │       │   └── cashflow.svg
-│       │       │       ├── chunk-C3ZUK3XP.js
-│       │       │       ├── chunk-JIEURQKJ.js
-│       │       │       ├── favicon.ico
-│       │       │       ├── index.html
-│       │       │       ├── main-6FPI7PRQ.js
-│       │       │       ├── polyfills-FFHMD2TL.js
-│       │       │       └── styles-GEM354FH.css
+│       │       │   ├── 8.b7e3024d7a6ff13b.js
+│       │       │   ├── assets
+│       │       │   │   └── cashflow.svg
+│       │       │   ├── index.html
+│       │       │   ├── main.a701fe1e423f5647.js
+│       │       │   ├── runtime.a52667ad5cd72574.js
+│       │       │   └── styles.2602fa29626097ef.css
 │       │       └── templates
 │       └── test
 │           └── java
@@ -71,36 +69,7 @@
 └── cashflow-user-interface
     ├── README.md
     ├── angular.json
-    ├── cashflow-server-core
-    │   └── src
-    │       └── main
-    │           └── resources
-    │               └── static
-    │                   └── cashflow-user-interface
-    │                       ├── 3rdpartylicenses.txt
-    │                       └── browser
-    │                           ├── assets
-    │                           │   └── cashflow.svg
-    │                           ├── chunk-C3ZUK3XP.js
-    │                           ├── chunk-JIEURQKJ.js
-    │                           ├── favicon.ico
-    │                           ├── index.html
-    │                           ├── main-6FPI7PRQ.js
-    │                           ├── polyfills-FFHMD2TL.js
-    │                           └── styles-GEM354FH.css
-    ├── dist
-    │   └── cashflow-user-interface
-    │       ├── 3rdpartylicenses.txt
-    │       └── browser
-    │           ├── assets
-    │           │   └── cashflow.svg
-    │           ├── chunk-C3ZUK3XP.js
-    │           ├── chunk-JIEURQKJ.js
-    │           ├── favicon.ico
-    │           ├── index.html
-    │           ├── main-6FPI7PRQ.js
-    │           ├── polyfills-FFHMD2TL.js
-    │           └── styles-GEM354FH.css
+    ├── ngsw-config.json
     ├── package-lock.json
     ├── package.json
     ├── public
@@ -113,7 +82,8 @@
     │   │   ├── app.component.ts
     │   │   ├── app.config.ts
     │   │   ├── app.routes.ts
-    │   │   ├── http-interceptor.service.ts
+    │   │   ├── interceptors
+    │   │   │   └── auth.interceptor.ts
     │   │   └── views
     │   │       ├── components
     │   │       │   ├── auth
@@ -142,15 +112,22 @@
     │   │       │       ├── welcome.component.scss
     │   │       │       ├── welcome.component.spec.ts
     │   │       │       └── welcome.component.ts
-    │   │       └── interface
-    │   │           └── stats.interface.ts
+    │   │       ├── interface
+    │   │       │   └── stats.interface.ts
+    │   │       └── services
+    │   │           ├── api.service.spec.ts
+    │   │           └── api.service.ts
     │   ├── assets
     │   │   └── cashflow.svg
+    │   ├── environments
+    │   │   ├── environment.prod.ts
+    │   │   └── environment.ts
     │   ├── index.html
     │   ├── main.ts
+    │   ├── proxy.conf.json
     │   └── styles.scss
     ├── tsconfig.app.json
     ├── tsconfig.json
     └── tsconfig.spec.json
 
-60 directories, 94 files
+50 directories, 81 files

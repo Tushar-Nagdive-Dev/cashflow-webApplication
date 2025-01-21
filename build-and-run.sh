@@ -41,12 +41,11 @@ log "Running Angular build..."
 ng build --configuration production || error "Angular build failed!"
 log "Angular application built successfully."
 
-# Step 3: Copy Angular Build to Spring Boot Static Resources
-log "Preparing Spring Boot static directory..."
-mkdir -p "$STATIC_DIR" || error "Failed to create Spring Boot static directory."
-rm -rf "$STATIC_DIR"/* || error "Failed to clean Spring Boot static directory."
-cp -r dist/* "$STATIC_DIR/" || error "Failed to copy Angular build to Spring Boot static directory."
-log "Angular build copied successfully to Spring Boot static directory."
+# Step 3: Verify Angular Build Output in Spring Boot Static Resources
+if [ ! -d "$STATIC_DIR" ]; then
+    error "Angular build output not found at $STATIC_DIR. Check the Angular outputPath configuration."
+fi
+log "Angular build output found in Spring Boot static directory."
 
 # Step 4: Build Spring Boot
 log "Building Spring Boot application..."

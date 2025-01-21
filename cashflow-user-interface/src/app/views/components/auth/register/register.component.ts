@@ -47,16 +47,16 @@ export class RegisterComponent implements OnInit{
   }
 
   onSubmit(): void {
-    if (this.registrationForm.valid) {
-      this.apiService.registerUser(this.registrationForm.value).subscribe(
-        (response) => {
-          console.log('Registration seccessfull', response);
-        },
-        (error) => {
-          console.error('Error during registration', error)
-        }
-      );
-    }
+    // if (this.registrationForm.valid) {
+    //   this.apiService.registerUser(this.registrationForm.value).subscribe(
+    //     (response) => {
+    //       console.log('Registration seccessfull', response);
+    //     },
+    //     (error) => {
+    //       console.error('Error during registration', error)
+    //     }
+    //   );
+    // }
   }
 
 }

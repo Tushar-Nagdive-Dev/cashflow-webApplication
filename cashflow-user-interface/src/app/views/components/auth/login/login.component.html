@@ -10,7 +10,7 @@
           <mat-form-field appearance="outline" floatLabel="always">
             <mat-label>Username</mat-label>
             <input matInput formControlName="username" placeholder="Enter your username" />
-            <mat-error *ngIf="loginForm.get('username')?.invalid">
+            <mat-error *ngIf="getControl('username')?.hasError('required')">
               Username is required
             </mat-error>
           </mat-form-field>
@@ -19,7 +19,7 @@
           <mat-form-field appearance="outline" floatLabel="always">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password" type="password" placeholder="Enter your password" />
-            <mat-error *ngIf="loginForm.get('password')?.invalid">
+            <mat-error *ngIf="getControl('password')?.hasError('required')">
               Password is required
             </mat-error>
           </mat-form-field>
@@ -28,10 +28,14 @@
           <div class="forgot-password">
             <a routerLink="/forgot-password">Forgot Password?</a>
           </div>
+
+          <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
   
           <!-- Action Buttons -->
           <div class="action-buttons">
-            <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+            <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
               Log In
             </button>
           </div>

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inn.cashflow.server.core.common.responses.ApiResponse;
 import com.inn.cashflow.server.core.users.dto.AuthRequestDTO;
 import com.inn.cashflow.server.core.users.dto.RegisterRequestDTO;
 import com.inn.cashflow.server.core.users.services.AuthService;
@@ -20,7 +21,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody AuthRequestDTO authRequest) {
+    public ResponseEntity<ApiResponse<?>> login(@RequestBody AuthRequestDTO authRequest) {
         return authService.loginUser(authRequest);
     }
 
