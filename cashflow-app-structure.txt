@@ -1,0 +1,156 @@
+.
+├── build-and-run.sh
+├── cashflow-app-structure.txt
+├── cashflow-server-core
+│   ├── HELP.md
+│   ├── mvnw
+│   ├── mvnw.cmd
+│   ├── pom.xml
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── com
+│       │   │       └── inn
+│       │   │           └── cashflow
+│       │   │               └── server
+│       │   │                   └── core
+│       │   │                       ├── CashflowServerCoreApplication.java
+│       │   │                       ├── baseimpl
+│       │   │                       │   ├── BaseEntity.java
+│       │   │                       │   └── config
+│       │   │                       │       ├── JwtAuthenticationFilter.java
+│       │   │                       │       ├── JwtTokenUtil.java
+│       │   │                       │       ├── SecurityConfig.java
+│       │   │                       │       ├── UserContext.java
+│       │   │                       │       ├── UserContextCleanupFilter.java
+│       │   │                       │       └── WebConfig.java
+│       │   │                       └── users
+│       │   │                           ├── controller
+│       │   │                           │   ├── AuthController.java
+│       │   │                           │   └── WebController.java
+│       │   │                           ├── dto
+│       │   │                           │   ├── AuthRequestDTO.java
+│       │   │                           │   └── RegisterRequestDTO.java
+│       │   │                           ├── entities
+│       │   │                           │   └── Users.java
+│       │   │                           ├── enums
+│       │   │                           │   └── Roles.java
+│       │   │                           ├── repository
+│       │   │                           │   └── UserRepository.java
+│       │   │                           └── services
+│       │   │                               ├── AuthService.java
+│       │   │                               ├── CustomUserDetailsService.java
+│       │   │                               └── impl
+│       │   │                                   └── AuthServiceImpl.java
+│       │   └── resources
+│       │       ├── application.properties
+│       │       ├── database
+│       │       │   └── migration
+│       │       │       └── V1__create_user.sql
+│       │       ├── static
+│       │       │   ├── 3rdpartylicenses.txt
+│       │       │   └── browser
+│       │       │       ├── assets
+│       │       │       │   └── cashflow.svg
+│       │       │       ├── chunk-C3ZUK3XP.js
+│       │       │       ├── chunk-JIEURQKJ.js
+│       │       │       ├── favicon.ico
+│       │       │       ├── index.html
+│       │       │       ├── main-6FPI7PRQ.js
+│       │       │       ├── polyfills-FFHMD2TL.js
+│       │       │       └── styles-GEM354FH.css
+│       │       └── templates
+│       └── test
+│           └── java
+│               └── com
+│                   └── inn
+│                       └── cashflow
+│                           └── server
+│                               └── core
+│                                   └── CashflowServerCoreApplicationTests.java
+└── cashflow-user-interface
+    ├── README.md
+    ├── angular.json
+    ├── cashflow-server-core
+    │   └── src
+    │       └── main
+    │           └── resources
+    │               └── static
+    │                   └── cashflow-user-interface
+    │                       ├── 3rdpartylicenses.txt
+    │                       └── browser
+    │                           ├── assets
+    │                           │   └── cashflow.svg
+    │                           ├── chunk-C3ZUK3XP.js
+    │                           ├── chunk-JIEURQKJ.js
+    │                           ├── favicon.ico
+    │                           ├── index.html
+    │                           ├── main-6FPI7PRQ.js
+    │                           ├── polyfills-FFHMD2TL.js
+    │                           └── styles-GEM354FH.css
+    ├── dist
+    │   └── cashflow-user-interface
+    │       ├── 3rdpartylicenses.txt
+    │       └── browser
+    │           ├── assets
+    │           │   └── cashflow.svg
+    │           ├── chunk-C3ZUK3XP.js
+    │           ├── chunk-JIEURQKJ.js
+    │           ├── favicon.ico
+    │           ├── index.html
+    │           ├── main-6FPI7PRQ.js
+    │           ├── polyfills-FFHMD2TL.js
+    │           └── styles-GEM354FH.css
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   └── favicon.ico
+    ├── src
+    │   ├── app
+    │   │   ├── app.component.html
+    │   │   ├── app.component.scss
+    │   │   ├── app.component.spec.ts
+    │   │   ├── app.component.ts
+    │   │   ├── app.config.ts
+    │   │   ├── app.routes.ts
+    │   │   ├── http-interceptor.service.ts
+    │   │   └── views
+    │   │       ├── components
+    │   │       │   ├── auth
+    │   │       │   │   ├── login
+    │   │       │   │   │   ├── login.component.html
+    │   │       │   │   │   ├── login.component.scss
+    │   │       │   │   │   ├── login.component.spec.ts
+    │   │       │   │   │   └── login.component.ts
+    │   │       │   │   └── register
+    │   │       │   │       ├── register.component.html
+    │   │       │   │       ├── register.component.scss
+    │   │       │   │       ├── register.component.spec.ts
+    │   │       │   │       └── register.component.ts
+    │   │       │   ├── features-view
+    │   │       │   │   ├── features-view.component.html
+    │   │       │   │   ├── features-view.component.scss
+    │   │       │   │   ├── features-view.component.spec.ts
+    │   │       │   │   └── features-view.component.ts
+    │   │       │   ├── learn-more
+    │   │       │   │   ├── learn-more.component.html
+    │   │       │   │   ├── learn-more.component.scss
+    │   │       │   │   ├── learn-more.component.spec.ts
+    │   │       │   │   └── learn-more.component.ts
+    │   │       │   └── welcome
+    │   │       │       ├── welcome.component.html
+    │   │       │       ├── welcome.component.scss
+    │   │       │       ├── welcome.component.spec.ts
+    │   │       │       └── welcome.component.ts
+    │   │       └── interface
+    │   │           └── stats.interface.ts
+    │   ├── assets
+    │   │   └── cashflow.svg
+    │   ├── index.html
+    │   ├── main.ts
+    │   └── styles.scss
+    ├── tsconfig.app.json
+    ├── tsconfig.json
+    └── tsconfig.spec.json
+
+60 directories, 94 files

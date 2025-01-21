@@ -1,0 +1,137 @@
+.learn-more-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(to bottom, #f0f4f8, #ffffff);
+  }
+  
+  // Hero Section
+  .hero-section {
+    text-align: center;
+    background: linear-gradient(135deg, #4caf50, #81c784);
+    color: white;
+    padding: 50px 20px;
+    width: 100%;
+  
+    h1 {
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+  
+    button {
+      font-size: 16px;
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+  }
+  
+  // Stats Section
+  .stats-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 20px;
+  
+    .stat-card {
+      background: white;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      width: 200px;
+  
+      h2 {
+        font-size: 32px;
+        font-weight: bold;
+        color: #4caf50;
+      }
+  
+      p {
+        font-size: 14px;
+        color: #616161;
+      }
+    }
+  }
+  
+  // Features Section
+  .features-section {
+    padding: 50px 20px;
+    background: #f9f9f9;
+    width: 100%;
+    text-align: center;
+  
+    h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+  
+    .feature-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 20px;
+  
+      .feature-item {
+        background: white;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        width: 250px;
+        padding: 20px;
+        text-align: center;
+  
+        .feature-icon {
+          font-size: 36px;
+          color: #4caf50;
+          margin-bottom: 10px;
+        }
+  
+        h3 {
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
+  
+        p {
+          font-size: 14px;
+          color: #757575;
+        }
+      }
+    }
+  }
+  
+  // Promotion Section
+  .promotion-section {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #2196f3, #64b5f6);
+    color: white;
+    width: 100%;
+  
+    h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+  
+    button {
+      font-size: 16px;
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+  }
+  

@@ -1,0 +1,23 @@
+<div class="features-container">
+    <mat-card class="feature-card" *ngFor="let card of cards">
+        <mat-card-header>
+        <div mat-card-avatar class="card-icon" [style.background-color]="card.iconBackground">
+            <mat-icon>{{ card.icon }}</mat-icon>
+        </div>
+        <mat-card-title>{{ card.title }}</mat-card-title>
+        <mat-card-subtitle>{{ card.subtitle }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        <p>{{ card.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-raised-button color="primary" [routerLink]="card.link">
+            Explore
+        </button>
+        <button mat-stroked-button color="accent" [routerLink]="card.link">
+            Learn More
+        </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+  
