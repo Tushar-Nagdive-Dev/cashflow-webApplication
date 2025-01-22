@@ -43,7 +43,7 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allow preflight requests
                     .requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                    .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+                    .requestMatchers("/api/user/**", "/api/currency**").hasAnyRole("USER", "ADMIN")
                     .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
