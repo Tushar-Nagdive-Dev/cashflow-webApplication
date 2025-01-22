@@ -4,6 +4,7 @@ import { FeaturesViewComponent } from './views/components/features-view/features
 import { LearnMoreComponent } from './views/components/learn-more/learn-more.component';
 import { RegisterComponent } from './views/components/auth/register/register.component';
 import { LoginComponent } from './views/components/auth/login/login.component';
+import { ExpenseHubComponent } from './views/components/expense-hub/expense-hub.component';
 
 export const routes: Routes = [
     {
@@ -30,5 +31,9 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'expenese-hub',
+        component: ExpenseHubComponent
     }
 ];

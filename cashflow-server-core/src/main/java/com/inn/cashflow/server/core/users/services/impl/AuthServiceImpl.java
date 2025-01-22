@@ -3,6 +3,8 @@ package com.inn.cashflow.server.core.users.services.impl;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.inn.cashflow.server.core.baseimpl.aopimpl.TrackExecutionTime;
 import com.inn.cashflow.server.core.baseimpl.config.JwtTokenUtil;
 import com.inn.cashflow.server.core.common.responses.ApiResponse;
 import com.inn.cashflow.server.core.users.dto.AuthRequestDTO;
@@ -24,6 +27,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService{
+
+    private static final Logger log = LoggerFactory.getLogger(AuthServiceImpl.class);
 
     private final UserRepository userRepository;
 
@@ -60,8 +65,13 @@ public class AuthServiceImpl implements AuthService{
         return ResponseEntity.ok("User registered successfully!");
     }
 
+    @TrackExecutionTime
     @Override
     public ResponseEntity<ApiResponse<?>> loginUser(AuthRequestDTO request) {
+        log.info("@class AuthServiceImpl @method loginUser");
+        log.info("This is an INFO log from the application.");
+        log.debug("This is a DEBUG log from the application.");
+        log.error("This is an ERROR log from the application.");
         // Authenticate the user; this will throw an exception if authentication fails
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.username(), request.password()));

@@ -5,6 +5,7 @@ import io.jsonwebtoken.security.Keys;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,15 +14,27 @@ import javax.crypto.SecretKey;
 @Component
 public class JwtTokenUtil {
 
-    private final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512); // Secure key generation
+    private final SecretKey SECRET_KEY;
     private final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
 
+    public JwtTokenUtil() {
+        // Fetching the JWT_SECRET from environment variable
+        String secret = "7oQE7mkoqdfPGnYU4QSC+dQx9NyXubWXRsJ/9uiOHrs1fNFCKBjqbstNSKEef3m6nWoV8bdYPgQmqIw2R/Umpg==";
+        if (secret == null || secret.isEmpty()) {
+            throw new IllegalStateException("JWT_SECRET environment variable must be set");
+        }
+
+        // Decode the base64-encoded string into a secret key
+        byte[] keyBytes = Base64.getDecoder().decode(secret);
+        this.SECRET_KEY = Keys.hmacShaKeyFor(keyBytes);
+    }
+
     /**
-     * Generate JWT token for the given username and roles.
+     * Generate a JWT token for the given username and roles.
      *
      * @param username the username
-     * @param roles    the user roles
-     * @return the generated token
+     * @param roles    the roles of the user
+     * @return the generated JWT token as a String
      */
     public String generateToken(String username, Set<String> roles) {
         return Jwts.builder()
@@ -29,40 +42,40 @@ public class JwtTokenUtil {
                 .claim("roles", roles)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS512) // Use the generated secure key
+                .signWith(SECRET_KEY, SignatureAlgorithm.HS512)
                 .compact();
     }
 
     /**
-     * Parse and retrieve claims from the token.
+     * Parse and extract claims from the given token.
      *
      * @param token the JWT token
-     * @return the claims
+     * @return the claims extracted from the token
      */
     public Claims getClaims(String token) {
         JwtParser jwtParser = Jwts.parserBuilder()
-                .setSigningKey(SECRET_KEY) // Use the same key for parsing
+                .setSigningKey(SECRET_KEY)
                 .build();
         return jwtParser.parseClaimsJws(token).getBody();
     }
 
     /**
-     * Validate the token against username and expiration.
+     * Validate the given token by checking its signature and expiration.
      *
      * @param token    the JWT token
-     * @param username the username
-     * @return true if valid, false otherwise
+     * @param username the username to validate against
+     * @return true if the token is valid, false otherwise
      */
     public boolean isTokenValid(String token, String username) {
-        final String tokenUsername = getClaims(token).getSubject();
+        String tokenUsername = getClaims(token).getSubject();
         return (tokenUsername.equals(username) && !isTokenExpired(token));
     }
 
     /**
-     * Check if the token is expired.
+     * Check if the given token is expired.
      *
      * @param token the JWT token
-     * @return true if expired, false otherwise
+     * @return true if the token is expired, false otherwise
      */
     private boolean isTokenExpired(String token) {
         return getClaims(token).getExpiration().before(new Date());

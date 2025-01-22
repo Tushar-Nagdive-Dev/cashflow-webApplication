@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../../services/auth.service';
 import { TokenService } from '../../../services/token.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ import { TokenService } from '../../../services/token.service';
     MatCardModule,
     MatFormFieldModule,
     CommonModule,
+    RouterModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'], // Fixed property name
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
   isLoading = false; // Flag to disable the button during API call
   errorMessage: string | null = null; // For displaying error messages
 
-  constructor(private fb: FormBuilder, private authService: AuthService,public token: TokenService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService,public token: TokenService, private route: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -51,8 +53,7 @@ export class LoginComponent implements OnInit {
         console.log('Login successful', response);
         this.isLoading = false;
         this.token.saveToken(response.data.token);
-        // Optionally, redirect the user after successful login
-        // this.router.navigate(['/dashboard']);
+        this.route.navigate(['/expenese-hub']);
       },
       error: (err) => {
         console.error('Login failed', err);
