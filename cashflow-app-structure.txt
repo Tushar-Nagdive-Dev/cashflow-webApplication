@@ -4,6 +4,11 @@
 ├── cashflow-app-structure.txt
 ├── cashflow-server-core
 │   ├── HELP.md
+│   ├── logs
+│   │   ├── cashflow-app.2025-01-22.log
+│   │   ├── cashflow-app.log
+│   │   ├── cashflow-app.log.0
+│   │   └── cashflow-app.log.1
 │   ├── mvnw
 │   ├── mvnw.cmd
 │   ├── pom.xml
@@ -16,8 +21,32 @@
 │       │   │               └── server
 │       │   │                   └── core
 │       │   │                       ├── CashflowServerCoreApplication.java
+│       │   │                       ├── balancedetails
+│       │   │                       │   ├── controller
+│       │   │                       │   ├── entity
+│       │   │                       │   │   ├── Balance.java
+│       │   │                       │   │   └── Transactions.java
+│       │   │                       │   ├── enums
+│       │   │                       │   │   ├── BalanceStatus.java
+│       │   │                       │   │   ├── TransactionStatus.java
+│       │   │                       │   │   └── TransactionType.java
+│       │   │                       │   ├── repos
+│       │   │                       │   └── services
 │       │   │                       ├── baseimpl
 │       │   │                       │   ├── BaseEntity.java
+│       │   │                       │   ├── SecretKeyGenerator.java
+│       │   │                       │   ├── aopimpl
+│       │   │                       │   │   ├── ExecutionTimeTrackerAspect.java
+│       │   │                       │   │   ├── LogDirectoryInitializer.java
+│       │   │                       │   │   ├── TrackExecutionTime.java
+│       │   │                       │   │   └── exceptions
+│       │   │                       │   │       ├── CashFlowSystemException.java
+│       │   │                       │   │       ├── Exception.README.md
+│       │   │                       │   │       ├── ExceptionHandlingAspect.java
+│       │   │                       │   │       ├── enums
+│       │   │                       │   │       │   └── ErrorCode.java
+│       │   │                       │   │       └── model
+│       │   │                       │   │           └── ErrorResponse.java
 │       │   │                       │   └── config
 │       │   │                       │       ├── JwtAuthenticationFilter.java
 │       │   │                       │       ├── JwtTokenUtil.java
@@ -25,6 +54,46 @@
 │       │   │                       │       ├── UserContext.java
 │       │   │                       │       ├── UserContextCleanupFilter.java
 │       │   │                       │       └── WebConfig.java
+│       │   │                       ├── common
+│       │   │                       │   ├── Constants
+│       │   │                       │   │   ├── CommonConstants.java
+│       │   │                       │   │   └── IncomeSourceConstants.java
+│       │   │                       │   └── responses
+│       │   │                       │       └── ApiResponse.java
+│       │   │                       ├── currencies
+│       │   │                       │   ├── controller
+│       │   │                       │   │   └── CurrencyController.java
+│       │   │                       │   ├── entity
+│       │   │                       │   │   └── Currencies.java
+│       │   │                       │   ├── repos
+│       │   │                       │   │   └── CurrencyRepository.java
+│       │   │                       │   └── service
+│       │   │                       │       ├── CurrencyService.java
+│       │   │                       │       └── impl
+│       │   │                       │           └── CurrencyServiceImpl.java
+│       │   │                       ├── expensehub
+│       │   │                       │   ├── entities
+│       │   │                       │   │   ├── AmountDetails.java
+│       │   │                       │   │   └── ExpenseDetails.java
+│       │   │                       │   ├── enums
+│       │   │                       │   │   ├── AmountType.java
+│       │   │                       │   │   └── ExpenseStatus.java
+│       │   │                       │   └── repos
+│       │   │                       ├── incomesource
+│       │   │                       │   ├── controller
+│       │   │                       │   │   └── IncomeSourceController.java
+│       │   │                       │   ├── dto
+│       │   │                       │   │   └── AddIncomeDTO.java
+│       │   │                       │   ├── entity
+│       │   │                       │   │   └── IncomeSource.java
+│       │   │                       │   ├── enums
+│       │   │                       │   │   └── IncomeSourceStatus.java
+│       │   │                       │   ├── repository
+│       │   │                       │   │   └── IncomeRepository.java
+│       │   │                       │   └── services
+│       │   │                       │       ├── IncomeSourceService.java
+│       │   │                       │       └── impl
+│       │   │                       │           └── IncomeSourceServiceImpl.java
 │       │   │                       └── users
 │       │   │                           ├── controller
 │       │   │                           │   ├── AuthController.java
@@ -47,7 +116,12 @@
 │       │       ├── application.properties
 │       │       ├── database
 │       │       │   └── migration
-│       │       │       └── V1__create_user.sql
+│       │       │       ├── V1__create_user.sql
+│       │       │       ├── V2__balance_table.sql
+│       │       │       ├── V3__currency.sql
+│       │       │       ├── V4__currencies_insert.sql
+│       │       │       └── V5__income_source.sql
+│       │       ├── logback-spring.xml
 │       │       ├── static
 │       │       │   ├── 3rdpartylicenses.txt
 │       │       │   ├── 8.b7e3024d7a6ff13b.js
@@ -70,7 +144,6 @@
     ├── README.md
     ├── angular.json
     ├── ngsw-config.json
-    ├── package-lock.json
     ├── package.json
     ├── public
     │   └── favicon.ico
@@ -97,6 +170,11 @@
     │   │       │   │       ├── register.component.scss
     │   │       │   │       ├── register.component.spec.ts
     │   │       │   │       └── register.component.ts
+    │   │       │   ├── expense-hub
+    │   │       │   │   ├── expense-hub.component.html
+    │   │       │   │   ├── expense-hub.component.scss
+    │   │       │   │   ├── expense-hub.component.spec.ts
+    │   │       │   │   └── expense-hub.component.ts
     │   │       │   ├── features-view
     │   │       │   │   ├── features-view.component.html
     │   │       │   │   ├── features-view.component.scss
@@ -113,10 +191,15 @@
     │   │       │       ├── welcome.component.spec.ts
     │   │       │       └── welcome.component.ts
     │   │       ├── interface
+    │   │       │   ├── Expense.interface.ts
     │   │       │   └── stats.interface.ts
     │   │       └── services
     │   │           ├── api.service.spec.ts
-    │   │           └── api.service.ts
+    │   │           ├── api.service.ts
+    │   │           ├── auth.service.spec.ts
+    │   │           ├── auth.service.ts
+    │   │           ├── token.service.spec.ts
+    │   │           └── token.service.ts
     │   ├── assets
     │   │   └── cashflow.svg
     │   ├── environments
@@ -130,4 +213,4 @@
     ├── tsconfig.json
     └── tsconfig.spec.json
 
-50 directories, 81 files
+83 directories, 131 files
