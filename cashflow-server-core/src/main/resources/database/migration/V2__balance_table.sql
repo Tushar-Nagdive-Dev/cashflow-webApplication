@@ -1,5 +1,5 @@
--- Step 1: Create `balances` table without foreign key constraints
-CREATE TABLE IF NOT EXISTS balances (
+-- Step 1: Create `balance` table without foreign key constraints
+CREATE TABLE IF NOT EXISTS balance (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
     currency VARCHAR(3) NOT NULL,
@@ -40,17 +40,17 @@ CREATE TABLE IF NOT EXISTS transactions (
 );
 
 -- Step 3: Add foreign key constraints after tables exist
-ALTER TABLE balances
+ALTER TABLE balance
 ADD CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users (id);
 
 ALTER TABLE transactions
 ADD CONSTRAINT fk_user_transaction FOREIGN KEY (user_id) REFERENCES users (id);
 
 ALTER TABLE transactions
-ADD CONSTRAINT fk_balance_transaction FOREIGN KEY (balance_id) REFERENCES balances (id);
+ADD CONSTRAINT fk_balance_transaction FOREIGN KEY (balance_id) REFERENCES balance (id);
 
 ALTER TABLE transactions
 ADD CONSTRAINT fk_related_transaction FOREIGN KEY (related_transaction_id) REFERENCES transactions (id);
 
-ALTER TABLE balances
+ALTER TABLE balance
 ADD CONSTRAINT fk_transaction FOREIGN KEY (last_transaction_id) REFERENCES transactions (id);

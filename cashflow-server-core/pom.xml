@@ -137,6 +137,21 @@
 
 	<build>
 		<plugins>
+			<!-- flyway maven -->
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>9.22.0</version>
+				<configuration>
+					<url>jdbc:postgresql://localhost:5432/cashflow_db</url>
+					<user>cashflow_dev</user>
+					<password>connect</password>
+					<schemas>public</schemas>
+					<locations>
+						<location>classpath:database/migration</location>
+					</locations>
+				</configuration>
+			</plugin>
 			<!-- Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

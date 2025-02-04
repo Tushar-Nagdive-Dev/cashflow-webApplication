@@ -7,6 +7,8 @@ import com.inn.cashflow.server.core.incomesource.enums.IncomeSourceStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,9 +18,9 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
-@Table(name = "income_source")
+@Table(name = "income_sources")
 @EqualsAndHashCode(callSuper = false)
-public class IncomeSource extends BaseEntity{
+public class IncomeSource extends BaseEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +47,7 @@ public class IncomeSource extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false, length = 10)
     private IncomeSourceStatus status;
 }
